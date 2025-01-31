@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   title = 'laundry-a';
   employeeForm!: FormGroup;
+  employees: any;
 
   constructor(
     public fb: FormBuilder,
@@ -25,13 +26,24 @@ export class AppComponent implements OnInit {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-    })
+    });
+
+    this.employeeService.getAllEmployees().subscribe((data: any) => {
+      this.employees = data;
+      console.log(data);
+    }),
+    (error: any) => {
+      console.error(error);
+    }
+    
+
   }
+
   onSubmit() {
     if (this.employeeForm.valid) {
       console.log(this.employeeForm.value);
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.employeeForm.value));
-    }
+    } 
   }
 
 }
