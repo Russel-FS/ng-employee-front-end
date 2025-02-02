@@ -3,9 +3,9 @@ import { Employee } from "../models/employee";
 import { EMPLOYEE_REPOSITORY, EmployeeRepository } from "../repositories/employee-repository";
 import { Inject, Injectable } from "@angular/core";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class GetEmployeesUseCase {
-  constructor( 
+  constructor(
     @Inject(EMPLOYEE_REPOSITORY)
     private employeeRepository: EmployeeRepository
   ) { }
