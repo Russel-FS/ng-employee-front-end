@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects'; 
-import { EMPLOYEE_REPOSITORY } from './domain/repositories/employee-repository';
-import { EmployeeImplRepository } from './infrastructure/repositories/employee-impl-repository';
- 
+import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { EmployeeComponent } from './presentation/features/employee/employee.component';
+
 @NgModule({
-  imports: [ 
-   
+  imports: [
+    BrowserModule
   ],
   providers: [
-    {
-      provide: EMPLOYEE_REPOSITORY,
-      useClass: EmployeeImplRepository
-    }
+    provideHttpClient()
   ],
 })
 export class AppModule { }

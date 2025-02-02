@@ -1,41 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Employee } from '../../../domain/entities/Employee';
-import { GetAllEmployeesUseCase } from '../../../domain/use-cases/GetAllEmployeesUseCase';
-import { Store } from '@ngrx/store';
-import * as EmployeeActions from '../../state/actions/employee-actions';
+import { GetAllEmployeesUsecase } from '../../../application/use-cases/get-all-employees-usecase';
+import { EmployeeRepositoryImpl } from '../../../infrastructure/persistence/employee-repository-impl';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+    selector: 'app-employee',
+    templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
+    employees: Employee[] = [];
+    isLoading = false;
+    error: string | null = null;
+    private getAllEmployeesUsecase: GetAllEmployeesUsecase;
 
-  employeeForm!: FormGroup;
-  employeeList: Employee[] = [];
+    constructor(private http: HttpClient) {
+        const repository = new EmployeeRepositoryImpl(http);
+        this.getAllEmployeesUsecase = new GetAllEmployeesUsecase(repository);
+    }
+    
+    async ngOnInit() {
+        await this.loadEmployees();
+    }
 
-  constructor(
-    private fb: FormBuilder,
-    private getAllEmployeeUseCase: GetAllEmployeesUseCase,
-    private store: Store
-  ) { }
-
-  ngOnInit(): void { 
-    this.initForm();
-    this.loadEmployees();
-  }
-
-  private initForm(): void {
-    this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-    });
-  }
-
-  private loadEmployees(): void {
-    this.store.dispatch(EmployeeActions.loadEmployees());
-  }
-
-
+    async loadEmployees() {
+        this.isLoading = true;
+        this.error = null;
+        try {
+            this.employees = await this.getAllEmployeesUsecase.execute();
+        } catch (error) {
+            this.error = 'Error al cargar los empleados';
+            console.error('Error fetching employees:', error);
+        } finally {
+            this.isLoading = false;
+        }
+    }
 }
