@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { employeeReducer } from './state/reducers/employee-reducer';
-import { EmployeeEffects } from './state/effects/employee-effects';
-
+import { EffectsModule } from '@ngrx/effects'; 
+import { EMPLOYEE_REPOSITORY } from './domain/repositories/employee-repository';
+import { EmployeeImplRepository } from './infrastructure/repositories/employee-impl-repository';
+ 
 @NgModule({
   imports: [ 
-    StoreModule.forRoot({ employees: employeeReducer }),
-    EffectsModule.forRoot([EmployeeEffects])
+   
+  ],
+  providers: [
+    {
+      provide: EMPLOYEE_REPOSITORY,
+      useClass: EmployeeImplRepository
+    }
   ],
 })
 export class AppModule { }

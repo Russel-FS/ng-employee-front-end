@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { EmployeeService } from './core/services/employee.service';
-
+ 
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,8 +16,8 @@ export class AppComponent implements OnInit {
   employees: any;
 
   constructor(
-    public fb: FormBuilder,
-    public employeeService: EmployeeService
+    public fb: FormBuilder 
+  
   ) {
 
   }
@@ -26,17 +25,7 @@ export class AppComponent implements OnInit {
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-    });
-
-    this.employeeService.getAllEmployees().subscribe((data: any) => {
-      this.employees = data;
-      console.log(data);
-    }),
-    (error: any) => {
-      console.error(error);
-    }
-    
-
+    }); 
   }
 
   onSubmit() {
