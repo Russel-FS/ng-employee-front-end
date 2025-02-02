@@ -5,12 +5,12 @@ import { firstValueFrom } from "rxjs";
 
 export class EmployeeRepositoryImpl implements IEmployeeRepository {
 
-    private API_URL = 'http://localhost:3000/employees';
+    private API_URL = 'http://localhost:3000/api/employees';
 
     constructor(private http: HttpClient) { }
 
     async findAll(): Promise<Employee[]> {
-        return firstValueFrom(this.http.get<Employee[]>(this.API_URL));
+        return firstValueFrom(this.http.get<Employee[]>(`${this.API_URL}/all`));
     }
 
     findById(id: string): Promise<Employee> {

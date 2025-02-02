@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { EmployeeComponent } from "./presentation/features/employee/employee.component";
  
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule,CommonModule],
+  imports: [RouterOutlet, ReactiveFormsModule, CommonModule, EmployeeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
