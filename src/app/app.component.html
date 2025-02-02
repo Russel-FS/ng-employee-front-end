@@ -6,33 +6,51 @@
       </div>
     </div>
 
-    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="m-auto mt-10 w-1/2 shadow-2xl p-7 rounded-2xl">
+    <!-- Tabs -->
+    <div class="flex space-x-4 border-b mb-6 mt-4">
+      <button 
+        [class]="activeTab === 'form' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'"
+        class="py-2 px-4 font-medium"
+        (click)="activeTab = 'form'">
+        Registrar Empleado
+      </button>
+      <button 
+        [class]="activeTab === 'list' ? 'border-b-2 border-blue-500 text-blue-500' : 'text-gray-500'"
+        class="py-2 px-4 font-medium"
+        (click)="activeTab = 'list'">
+        Lista de Empleados
+      </button>
+    </div>
 
-      <div class="form-group">
-        <div class="space-y-2">
-          <label for="name">Name</label>
-          <input type="text"
-            class="p-3 bg-gray-100 rounded-full transition-colors outline-none focus:ring-2 focus:ring-blue-500"
-            id="name" formControlName="name" placeholder="Nombre del empleado" formControlName="name">
+    <!-- Contenido de los tabs -->
+    <div *ngIf="activeTab === 'form'">
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="m-auto mt-10 w-1/2 shadow-2xl p-7 rounded-2xl">
+        <div class="form-group">
+          <div class="space-y-2">
+            <label for="name">Name</label>
+            <input type="text"
+              class="p-3 bg-gray-100 rounded-full transition-colors outline-none focus:ring-2 focus:ring-blue-500"
+              id="name" formControlName="name" placeholder="Nombre del empleado" formControlName="name">
+          </div>
+          <div class="space-y-2">
+            <label for="email">email</label>
+            <input type="email"
+              class="p-3 bg-gray-100 rounded-full transition-colors outline-none focus:ring-2 focus:ring-blue-500"
+              id="email" formControlName="email" placeholder="Correo del empleado" formControlName="email">
+          </div>
         </div>
-        <div class="space-y-2">
-          <label for="email">email</label>
-          <input type="email"
-            class="p-3 bg-gray-100 rounded-full transition-colors outline-none focus:ring-2 focus:ring-blue-500"
-            id="email" formControlName="email" placeholder="Correo del empleado" formControlName="email">
+        <div class="flex justify-center">
+          <button
+            class="cursor-pointer px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors text-white font-semibold"
+            type="submit" [disabled]="!employeeForm.valid">Registrar Empleado</button>
         </div>
-      </div>
-      <div class="flex justify-center">
-        <button
-          class="cursor-pointer px-4 py-2 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors text-white font-semibold"
-          type="submit" [disabled]="!employeeForm.valid">Registrar Empleado</button>
-      </div>
-    </form>
-    
-    <app-employee></app-employee>
+      </form>
+    </div>
 
+    <div *ngIf="activeTab === 'list'">
+      <app-employee></app-employee>
+    </div>
   </div>
-
 </section>
 
-<router-outlet> </router-outlet>
+<router-outlet></router-outlet>

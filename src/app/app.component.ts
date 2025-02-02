@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   title = 'laundry-a';
   employeeForm!: FormGroup;
   employees: any;
+  activeTab: 'form' | 'list' = 'form';
 
   constructor(
     public fb: FormBuilder 
