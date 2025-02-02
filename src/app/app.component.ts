@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { EmployeeComponent } from "./presentation/features/employee/employee.component";
+import { EmployeeComponent } from "./presentation/components/employee/employee.component"; 
  
 @Component({
   selector: 'app-root',
