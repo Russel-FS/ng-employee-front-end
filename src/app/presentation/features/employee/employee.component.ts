@@ -9,14 +9,15 @@ import { HttpClient } from '@angular/common/http';
     templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
+
     employees: Employee[] = [];
     isLoading = false;
-    error: string | null = null;
-    private getAllEmployeesUsecase: GetAllEmployeesUsecase;
+    error: string | null = null; 
 
-    constructor(private http: HttpClient) {
-        const repository = new EmployeeRepositoryImpl(http);
-        this.getAllEmployeesUsecase = new GetAllEmployeesUsecase(repository);
+    constructor( 
+        private getAllEmployeesUsecase: GetAllEmployeesUsecase
+        
+    ) {  
     }
     
     async ngOnInit() {

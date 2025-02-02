@@ -1,9 +1,7 @@
-export interface CreateEmployeeDto {
-    name: string;
-    email: string;
-}
-
-export interface UpdateEmployeeDto {
-    name?: string;
-    email?: string;
+export class EmployeeDTO {
+    constructor(
+        public readonly id: string,
+        public readonly name: string,
+        public readonly email: string
+    ) {}
 }
