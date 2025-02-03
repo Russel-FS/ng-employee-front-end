@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http'; 
 import { EmployeeComponent } from './presentation/components/employee/employee.component';
 import { EmployeeRepositoryService } from './data/repositories/employee-repository-service'; 
-import { EMPLOYEE_REPOSITORY } from './core/domain/repositories/employee-repository';
+import { EMPLOYEE_REPOSITORY } from './core/domain/repositories/i-employee-repository';
 
 @NgModule({
   

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@angular/core";
-import { EMPLOYEE_REPOSITORY, EmployeeRepository } from "../repositories/employee-repository";
+import { EMPLOYEE_REPOSITORY, IEmployeeRepository } from "../repositories/i-employee-repository";
 import { Observable } from "rxjs";
 import { Employee } from "../models/employee";
 
@@ -9,7 +9,7 @@ import { Employee } from "../models/employee";
 export class CreateEmployeeUseCase {
     constructor(
         @Inject(EMPLOYEE_REPOSITORY)
-        private employeeRepository: EmployeeRepository
+        private employeeRepository: IEmployeeRepository
     ) { 
     }
 

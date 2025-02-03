@@ -1,16 +1,16 @@
-import { HttpClient } from "@angular/common/http";
-import { EmployeeRepository } from "../../core/domain/repositories/employee-repository";
+import { HttpClient } from "@angular/common/http"; 
 import { map, Observable } from "rxjs";
 import { Employee } from "../../core/domain/models/employee";
 import { EmployeeDto } from "../dtos/employee-dto";
 import { EmployeeMapper } from "../mappers/employee-mapper";
 import { Injectable } from "@angular/core";
 import { apiConfig } from "../api/api-config";
+import { IEmployeeRepository } from "../../core/domain/repositories/i-employee-repository";
 
 @Injectable({
   providedIn: 'root',
 })
-export class EmployeeRepositoryService implements EmployeeRepository {
+export class EmployeeRepositoryService implements IEmployeeRepository {
 
 
   constructor(private http: HttpClient) { }
