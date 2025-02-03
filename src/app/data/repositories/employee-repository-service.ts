@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http"; 
+import { HttpClient } from "@angular/common/http";
 import { map, Observable } from "rxjs";
 import { Employee } from "../../core/domain/models/employee";
 import { EmployeeDto } from "../dtos/employee-dto";
@@ -15,7 +15,7 @@ export class EmployeeRepositoryService implements IEmployeeRepository {
 
   constructor(private http: HttpClient) { }
 
-  createEmployee(employee: Employee): Observable<Employee> { 
+  createEmployee(employee: Employee): Observable<Employee> {
     const employeeDto = EmployeeMapper.toDTO(employee);
     return this.http.post<EmployeeDto>(apiConfig.employees.endpoints.createEmployee.url, employeeDto).pipe(
       map(EmployeeMapper.toDomain)
@@ -31,6 +31,12 @@ export class EmployeeRepositoryService implements IEmployeeRepository {
   getEmployeeById(id: string): Observable<Employee> {
     return this.http.get<EmployeeDto>(`${apiConfig.employees.url}${apiConfig.employees.endpoints.getEmployeeById}`).pipe(
       map(EmployeeMapper.toDomain)
+    );
+  }
+
+  deleteEmployee(id: number | null): Observable<void> {
+    return this.http.delete<void>(`${apiConfig.employees.endpoints.deleteEmployee.url(id)}`).pipe(
+      map(() => {})
     );
   }
 }

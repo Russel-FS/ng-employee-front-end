@@ -18,8 +18,12 @@ export const apiConfig = {
             },
             updateEmployee: {
                 method: 'PUT',
-                url: (id: string) => `${BASE_URL}/update/${id}`,
+                url: (id: number | null) => `${BASE_URL}/update/${id}`,
             },
+            deleteEmployee: {
+                method: 'DELETE',
+                url: (id: number | null) => `${BASE_URL}/delete/${id}`,
+            }
         },
     },
 };

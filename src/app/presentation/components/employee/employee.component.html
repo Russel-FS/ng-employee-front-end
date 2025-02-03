@@ -3,40 +3,50 @@
 
     @if (isLoading) {
         <div class="loading">
-            Cargando empleados...
+            <i class="fas fa-spinner fa-spin"></i> Cargando empleados...
         </div>
     }
 
     @if (error) {
         <div class="error-message">
-            {{ error }}
+            <i class="fas fa-exclamation-circle"></i> {{ error }}
         </div>
     }
 
     @if (!isLoading && !error) {
-        <table class="employee-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (employee of employees; track employee.id) {
+        <div class="table-responsive">
+            <table class="employee-table">
+                <thead>
                     <tr>
-                        <td>{{ employee.id }}</td>
-                        <td>{{ employee.name }}</td>
-                        <td>{{ employee.email }}</td>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @for (employee of employees; track employee.id) {
+                        <tr>
+                            <td>{{ employee.id }}</td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>
+                                <button class="btn-delete" (click)="deleteEmployee(employee.id)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-        @if (employees.length === 0) {
-            <div class="no-data">
-                No hay empleados disponibles
-            </div>
-        }
+            @if (employees.length === 0) {
+                <div class="no-data">
+                    <i class="fas fa-info-circle"></i> No hay empleados disponibles
+                </div>
+            }
+        </div>
     }
 </div>
+
+ 
